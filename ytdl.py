@@ -3,7 +3,7 @@ import subprocess
 import time
 from pytube import YouTube
 from google.cloud import storage
-from app import app
+from pydub import AudioSegment
 
 
 def ytdl_to_mp3(url):
@@ -17,14 +17,18 @@ def ytdl_to_mp3(url):
     # audio.download(output_path=".", filename=_filename)
     time.sleep(10)
 	# base, ext = os.path.splitext(out_file)
+    video = AudioSegment.from_file("%s.mp4" % _filename, "mp4")
+
     mp4 = "%s.mp4" % _filename
     mp3 = "%s.mp3" % _filename
+    flac = "%s.flac" % _filename
+    audio = video.export(flac, format="flac")
     # default_name = yt.title + '.mp4'
     # new_file = 'youtube4.mp3'
-    ffmpeg = "ffmpeg -i " +  "\"" + mp4 + "\" " + "\"" + mp3 + "\""
-    print(ffmpeg)
-    subprocess.run(ffmpeg, shell=True)
-    return mp3
+    # ffmpeg = "ffmpeg -i " +  "\"" + mp4 + "\" " + "\"" + mp3 + "\""
+    # print(ffmpeg)
+    # subprocess.run(ffmpeg, shell=True)
+    return flac
 
 
 
