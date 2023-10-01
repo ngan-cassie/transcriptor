@@ -24,14 +24,7 @@ def transcribe_gcs(gcs_uri):
     # them to get the transcripts for the entire audio file.
     transcript = []
     for result in response.results:
-        """ 
-        # The first alternative is the most likely one for this portion.
-        print(u"Transcript: {}".format(result.alternatives[0].transcript))
-        print("Confidence: {}".format(result.alternatives[0].confidence))
-        """
         transcript.append(result.alternatives[0].transcript)
+        
     print("".join(transcript))
     return "".join(transcript)
-
-# text = transcribe_gcs("gs://transcriber_audio_files/A one minute TEDx Talk for the digital age | Woody Roseland | TEDxMileHigh.mp3")
-# print(text)
