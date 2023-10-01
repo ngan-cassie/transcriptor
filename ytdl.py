@@ -9,25 +9,15 @@ from pydub import AudioSegment
 def ytdl_to_mp3(url):
     yt = YouTube(url)
     _filename = yt.title
-    # yt = YouTube('https://www.youtube.com/watch?v=J38Yq85ZoyY')
-	# video = yt.streams.filter(only_audio=True).first()
     yt.streams.first().download(output_path=".", filename=_filename + ".mp4")
 
-	# out_file = video.download(output_path=".")
-    # audio.download(output_path=".", filename=_filename)
     time.sleep(10)
-	# base, ext = os.path.splitext(out_file)
     video = AudioSegment.from_file("%s.mp4" % _filename, "mp4")
 
     mp4 = "%s.mp4" % _filename
     mp3 = "%s.mp3" % _filename
     flac = "%s.flac" % _filename
     audio = video.export(flac, format="flac")
-    # default_name = yt.title + '.mp4'
-    # new_file = 'youtube4.mp3'
-    # ffmpeg = "ffmpeg -i " +  "\"" + mp4 + "\" " + "\"" + mp3 + "\""
-    # print(ffmpeg)
-    # subprocess.run(ffmpeg, shell=True)
     return flac
 
 
